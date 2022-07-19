@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package com.demo.grpc;
+
+import "google/protobuf/empty.proto";
+
+message Student {
+  string firstName = 1;
+  string lastName = 2;
+}
+
+message SucceedResponse{
+  bool succeeded = 1;
+  string error = 2;
+}
+
+message GetStudentResponse {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+
+service StudentService {
+  rpc findAllStudents(google.protobuf.Empty) returns (stream Student);
+  rpc addNewStudent(Student) returns (SucceedResponse);
+  rpc existsStudent(Student) returns (SucceedResponse);
+}
+
